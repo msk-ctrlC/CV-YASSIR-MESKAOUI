@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yassir Meskaoui | Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- DESIGN GLOBAL --- */
+        body { 
+            margin: 0; 
+            background-color: #050505; 
+            color: white; 
+            font-family: 'Poppins', sans-serif; 
+            overflow-x: hidden; 
+        }
+        
+        canvas { display: block; position: fixed; top: 0; left: 0; z-index: -1; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #4da6ff; border-radius: 4px; }
+
+        /* --- CONTENU --- */
+        main { position: relative; z-index: 1; padding: 0 20px; }
+
+        /* Section HERO */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%);
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin: 0;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: white;
+            /* OMBRE LUMINEUSE (EFFET NÉON) */
+            text-shadow: 
+                0 0 10px rgba(77, 166, 255, 0.8),
+                0 0 40px rgba(77, 166, 255, 0.5),
+                0 0 80px rgba(77, 166, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #ccc;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-top: 15px;
+            margin-bottom: 50px;
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+            color: #4da6ff;
+            cursor: pointer;
+        }
+
+        /* --- CARTES --- */
+        .container { max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
+
+        .card {
+            background: rgba(20, 20, 25, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            transform: translateY(20px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(0);
+            box-shadow: 0 10px 30px rgba(77, 166, 255, 0.15);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+
+        .profile-photo {
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 30px auto;
+            border: 4px solid rgba(77, 166, 255, 0.5); box-shadow: 0 0 25px rgba(77, 166, 255, 0.2);
+        }
+
+        h2 {
+            color: #4da6ff; font-size: 2rem; margin-top: 0; margin-bottom: 30px; font-weight: 600; position: relative; display: inline-block;
+        }
+        h2::after { content: ''; display: block; width: 50px; height: 3px; background: #4da6ff; margin: 10px auto 0 auto; border-radius: 2px; opacity: 0.7; }
+
+        .text-content { text-align: left; }
+        h3 { font-size: 1.4rem; margin-bottom: 5px; color: white; font-weight: 600; }
+        .date { color: #888; font-size: 0.9rem; font-style: italic; margin-bottom: 15px; display: block;}
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 12px; padding-left: 25px; position: relative; color: #ddd; line-height: 1.7; }
+        li::before { content: "▹"; color: #4da6ff; position: absolute; left: 0; font-size: 1.2rem; }
+        
+        .badge { 
+            display: inline-block; 
+            background: rgba(77, 166, 255, 0.15); 
+            color: #4da6ff; 
+            padding: 8px 18px; /* Un peu plus grand pour les soft skills */
+            border-radius: 50px; 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            margin: 5px; 
+            border: 1px solid rgba(77, 166, 255, 0.3); 
+        }
+
+        /* FOOTER LIENS SOCIAUX */
+        .footer-social {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .social-link:hover {
+            background: #4da6ff;
+            border-color: #4da6ff;
+            color: #000;
+            box-shadow: 0 0 15px rgba(77, 166, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        @media (max-width: 768px) { h1 { font-size: 3rem; } .subtitle { font-size: 0.9rem; } .card { padding: 30px 20px; } }
+    </style>
+</head>
+<body>
+
+    <main>
+        <header>
+            <h1>Yassir Meskaoui</h1>
+            <div class="subtitle">Data • Statistique • Développement</div>
+            <div class="scroll-indicator">↓</div>
+        </header>
+
+        <div class="container">
+            
+            <section class="card">
+                <img src="MSKKK.jpg" alt="Yassir Meskaoui" class="profile-photo">
+                <h2>À Propos</h2>
+                <div class="text-content" style="text-align: center;">
+                    <p>Étudiant passionné, je combine la logique rigoureuse des mathématiques avec la créativité du développement Web. Mon objectif est de transformer des données complexes en solutions numériques utiles et performantes.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>🎓 Formation Académique</h2>
+                <div class="text-content">
+                    <div style="margin-bottom: 30px;">
+                        <h3>EST Fkih Ben Salah</h3>
+                        <span class="date">En cours (2025 - Présent)</span>
+                        <p><strong>Filière :</strong> Informatique Décisionnelle et Statistique (IDS).</p>
+                        <p>Cursus spécialisé dans l'analyse de données (Data Analysis), les probabilités, l'algorithmique avancée et le développement logiciel appliqué à la prise de décision.</p>
+                    </div>
+                    <div>
+                        <h3>Baccalauréat</h3>
+                        <span class="date">Obtenu en 2025</span>
+                        <p>Formation scientifique d'excellence préparant aux exigences des études supérieures techniques.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>🏆 Passions & Distinctions</h2>
+                <p style="margin-bottom: 30px;">L'excellence par la compétition et la résolution de problèmes.</p>
+                <div class="text-content">
+                    <div style="margin-bottom: 30px;">
+                        <h3>Mathématiques</h3>
+                        <div><span class="badge">Esprit Logique</span> <span class="badge">Compétition Nationale</span><span class="badge">OlYmpiades 2022 </span></div>
+                        <ul style="margin-top: 15px;">
+                            <li>Participation répétée aux <strong>Olympiades Nationales de Mathématiques</strong>.</li>
+                            <li>Développement d'une rigueur analytique, atout majeur pour la Data Science.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Physique-Chimie</h3>
+                        <span class="badge">Olympiades 2024</span>
+                        <ul style="margin-top: 15px;">
+                            <li>Participation aux <strong>Olympiades Nationales de Physique-Chimie (2024)</strong>.</li>
+                            <li>Goût prononcé pour les sciences appliquées et la démarche expérimentale.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>💻 Compétences Techniques</h2>
+                <div class="text-content">
+                    <ul>
+                        <li><strong>Langages :</strong> C, HTML5, CSS3, JavaScript.</li>
+                        <li><strong>Data & Maths :</strong> Analyse Statistique, Probabilités, Modélisation.</li>
+                        <li><strong>Outils :</strong> Git, GitHub, Three.js (3D Web).</li>
+                        <li><strong>Projet actuel :</strong> Conception de ce portfolio interactif en 3D.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>🗣️ Langues & Atouts</h2>
+                <div class="text-content">
+                    <div style="margin-bottom: 30px;">
+                        <h3>Langues</h3>
+                        <ul>
+                            <li><strong>Arabe :</strong> Langue maternelle.</li>
+                            <li><strong>Français :</strong> Niveau C1 (Avancé).</li>
+                            <li><strong>Anglais :</strong> Bon niveau.</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>Compétences Personnelles</h3>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <span class="badge">Esprit analytique</span>
+                            <span class="badge">Organisation et rigueur</span>
+                            <span class="badge">Capacité d’apprentissage rapide</span>
+                            <span class="badge">Travail en autonomie et en équipe</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer style="text-align: center; color: #666; margin-top: 60px; font-size: 0.8rem;">
+                <div class="footer-social">
+                    <a href="https://wa.me/qr/Y3ID3G7FDULDE1" target="_blank" class="social-link">WhatsApp</a>
+                    <a href="https://www.instagram.com/7ms_k7?igsh=NG1yMHI5NjNvY2xw" target="_blank" class="social-link">Instagram</a>
+                </div>
+
+                &copy; 2026 Yassir Meskaoui. Tous droits réservés.
+            </footer>
+        </div>
+    </main>
+
+    <script type="module">
+        import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
+        let camera, scene, renderer, particlesMesh;
+        let mouseX = 0, mouseY = 0;
+
+        init();
+        animate();
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.001);
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000);
+            camera.position.z = 1000;
+
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+            const particleCount = 12000;
+
+            for (let i = 0; i < particleCount; i++) {
+                const x = (Math.random() * 2 - 1) * 2000;
+                const y = (Math.random() * 2 - 1) * 2000;
+                const z = (Math.random() * 2 - 1) * 2000;
+                positions.push(x, y, z);
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                color: 0x4da6ff, size: 2.5, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
+            });
+
+            particlesMesh = new THREE.Points(geometry, material);
+            scene.add(particlesMesh);
+
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.5;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.5;
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            const positions = particlesMesh.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i + 2] += 4;
+                if (positions[i + 2] > 1000) { positions[i + 2] = -2000; }
+            }
+            particlesMesh.geometry.attributes.position.needsUpdate = true;
+            particlesMesh.rotation.z += 0.0005;
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
